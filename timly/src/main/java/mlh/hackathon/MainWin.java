@@ -19,18 +19,6 @@ public class MainWin {
 
         VBox vbox = new VBox();
 
-        Label label = new Label("FROM");
-        TextField textField = new TextField();
-        Label label2 = new Label("TO");
-        TextField textField2 = new TextField();
-
-        stackPane.getChildren().addAll(vbox);
-        vbox.getChildren().addAll(label, textField);
-        vbox.getChildren().addAll(label2, textField2);
-
-        vbox.setSpacing(20);
-
-        textField.setText(label.getText());
 
         mainStage.setTitle("Timly");
         mainStage.setScene(scene);
