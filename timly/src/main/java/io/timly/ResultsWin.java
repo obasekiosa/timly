@@ -1,4 +1,4 @@
-package mlh.hackathon;
+package io.timly;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

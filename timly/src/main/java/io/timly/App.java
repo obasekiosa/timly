@@ -1,4 +1,4 @@
-package mlh.hackathon;
+package io.timly;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
