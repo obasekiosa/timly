@@ -1,4 +1,4 @@
-module mlh.hackathon {
+module io.timly {
     requires javafx.controls;
-    exports mlh.hackathon;
+    exports io.timly;
 }
