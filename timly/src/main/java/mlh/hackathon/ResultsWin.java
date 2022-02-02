@@ -19,15 +19,15 @@ public class ResultsWin {
 
         VBox vbox = new VBox();
 
-        Label label = new Label("some text");
+        /*Label label = new Label("some text");
         TextField textField = new TextField();
 
         stackPane.getChildren().addAll(vbox);
-        vbox.getChildren().addAll(label, textField);
+        vbox.getChildren().addAll(label, textField);*/
 
         vbox.setSpacing(20);
 
-        textField.setText(label.getText());
+       // textField.setText(label.getText());
 
         resultsStage.setTitle("Timly Results");
         resultsStage.setScene(scene);
