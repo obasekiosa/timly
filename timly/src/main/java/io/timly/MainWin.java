@@ -94,4 +94,7 @@ st.getChildren().addAll(v1);
 		// launch the application
 		launch(args);
 	}
+
+    public static void mainWin(Stage stage) {
+    }
 }
