@@ -27,15 +27,16 @@ public class ResultsWin {
     public static String convTimeGap;
     
     public static void resultsWin(Stage stage) {
-        Stage resultsStage = new Stage();
+        Stage resultsWin = new Stage();
         StackPane stackPane = new StackPane();
         Scene scene = new Scene(stackPane, 1080, 820);
 
-        resultsStage.setMinHeight(700);
-        resultsStage.setMinWidth(900);  
+        resultsWin.setMinHeight(700);
+        resultsWin.setMinWidth(900);  
 
         VBox mainVBox = new VBox();
         VBox convVBox = new VBox();
+        HBox buttonHBox = new HBox();
         HBox convHBox = new HBox();
 
         timezone = "UTC";
@@ -53,7 +54,7 @@ public class ResultsWin {
         convertButton.setPrefSize(100.0, 40.0);
         convertButton.setTextAlignment(TextAlignment.CENTER);
 
-        Label toLabel = new Label("To");
+        Label toLabel = new Label("Convert To");
         toLabel.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 16));
 
         ComboBox<String> timezoneCombo = new ComboBox<String>();
@@ -64,25 +65,32 @@ public class ResultsWin {
         Label convertResLabel = new Label(convTimeGap);
         convertResLabel.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 16));
 
+        Button backButton = new Button("Back");
+        backButton.setFont(Font.font("verdaba", FontWeight.NORMAL, FontPosture.REGULAR, 16));
+        backButton.setPrefSize(100.0, 40.0);
+        backButton.setTextAlignment(TextAlignment.CENTER);
 
         stackPane.getChildren().addAll(mainVBox);
-        mainVBox.getChildren().addAll(mainLabel, resultslabel ,convVBox);
+        mainVBox.getChildren().addAll(mainLabel, resultslabel ,convVBox, buttonHBox);
         convVBox.getChildren().addAll(convHBox, convertResLabel);
-        convHBox.getChildren().addAll(convertButton, toLabel, timezoneCombo);
+        convHBox.getChildren().addAll(toLabel, timezoneCombo);
+        buttonHBox.getChildren().addAll(convertButton, backButton);
 
-        mainVBox.setSpacing(40);
+        mainVBox.setSpacing(50);
         convVBox.setSpacing(20);
         convHBox.setSpacing(15);
+        buttonHBox.setSpacing(15);
 
         mainVBox.setAlignment(Pos.CENTER);
         convVBox.setAlignment(Pos.CENTER);
+        buttonHBox.setAlignment(Pos.CENTER);
         convHBox.setAlignment(Pos.CENTER);
 
         stackPane.setPadding(new Insets(10, 10, 10, 10));
 
-        resultsStage.setTitle("Timly Results");
-        resultsStage.setScene(scene);
-        resultsStage.show();
+        resultsWin.setTitle("Timly Results");
+        resultsWin.setScene(scene);
+        resultsWin.show();
 
         convertButton.setOnMouseClicked(new EventHandler<Event>() {
 
@@ -91,7 +99,7 @@ public class ResultsWin {
                 if(timezone.equals(timezoneCombo.getValue())){
                     Alert alert = new Alert(AlertType.WARNING);
 	                alert.initModality(Modality.APPLICATION_MODAL);
-	                alert.initOwner(resultsStage);
+	                alert.initOwner(resultsWin);
 	                alert.setTitle("Timezone warning");
 	                alert.setHeaderText("Timezones are the same");
 	                alert.setContentText("You need to select a different timezone");
@@ -101,9 +109,18 @@ public class ResultsWin {
                     convTimeGap = "some convTimeGap returned from a backend method";
                     convertResLabel.setText(convTimeGap);
                 }
+            }    
+        });
 
+        backButton.setOnMouseClicked(new EventHandler<Event>() {
+
+            @Override
+            public void handle(Event event) {
+                MainWin.mainWin(stage);
+                resultsWin.close();
             }
             
         });
+
     }
 }
