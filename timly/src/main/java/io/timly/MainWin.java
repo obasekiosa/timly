@@ -1,38 +1,67 @@
 package io.timly;
 
+import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.layout.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert.AlertType;
+import java.time.*;
+import java.time.chrono.*;
+public class MainWin extends Application {
 
-public class MainWin {
-    
-    public static void mainWin(Stage stage) {
-        Stage mainStage = new Stage();
-        StackPane stackPane = new StackPane();
-        Scene scene = new Scene(stackPane, 1080, 820);
+	// launch the application
+	public void start(Stage s)
+	{
+		// set title for the stage
+		s.setTitle("creating date picker");
 
-        mainStage.setMinHeight(700);
-        mainStage.setMinWidth(900);  
+		// create a tile pane
+		TilePane r = new TilePane();
 
-        VBox vbox = new VBox();
-        Label label = new Label("FROM");
-        TextField textField = new TextField();
-        Label label2 = new Label("TO");
-        TextField textField2 = new TextField();
+		// label to show the date
+		Label l = new Label("no date selected");
 
-        stackPane.getChildren().addAll(vbox);
-        vbox.getChildren().addAll(label, textField);
-        vbox.getChildren().addAll(label2, textField2);
+		// create a date picker
+		DatePicker d = new DatePicker();
 
-        vbox.setSpacing(20);
+		// action event
+		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e)
+			{
+				// get the date picker value
+				LocalDate i = d.getValue();
 
-        textField.setText(label.getText());
+				// get the selected date
+				l.setText("Date :" + i);
+			}
+		};
 
-        mainStage.setTitle("Timly");
-        mainStage.setScene(scene);
-        mainStage.show();
-    }
+		// show week numbers
+		d.setShowWeekNumbers(true);
+
+		// when datePicker is pressed
+		d.setOnAction(event);
+
+		// add button and label
+		r.getChildren().add(d);
+		r.getChildren().add(l);
+
+		// create a scene
+		Scene sc = new Scene(r, 200, 200);
+
+		// set the scene
+		s.setScene(sc);
+
+		s.show();
+	}
+
+	public static void main(String args[])
+	{
+		// launch the application
+		launch(args);
+	}
 }
