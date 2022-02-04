@@ -93,11 +93,6 @@ public class MainWin {
 
         Button resultButton = new Button("Time Gap");
         resultButton.setFont(Font.font("verdaba", FontWeight.NORMAL, FontPosture.REGULAR, 16));
-               
-        
-        GridPane gPane = new GridPane();
-
-        
 
         VBox v1= new VBox();
         HBox h0= new HBox();
@@ -121,7 +116,7 @@ public class MainWin {
         h4.getChildren().addAll(label3, combo_boxnn,combo_box2nn,combo_box3nn);
         h5.getChildren().addAll(label4,combo_boxnx,combo_box2nx,combo_box3nx);
         v1.getChildren().addAll(h0,h1,h3,h4,h5,h2);
-        st.getChildren().addAll(v1, gPane);
+        st.getChildren().addAll(v1);
         v1.setAlignment(Pos.CENTER);
         h2.setAlignment(Pos.CENTER);
         h1.setAlignment(Pos.CENTER);

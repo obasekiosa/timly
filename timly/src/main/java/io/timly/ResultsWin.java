@@ -40,8 +40,15 @@ public class ResultsWin {
         HBox convHBox = new HBox();
 
         timezone = "UTC";
-        timeGap = "some TimeGap returned from a backend method";
-        convTimeGap = "10:00 - 12:00";
+
+        if(inter.findIntersection() == true) {
+            timeGap = inter.getTime();
+        }
+        else{
+            timeGap = "timerange error";
+        }
+
+        convTimeGap = "Select a timezone to make a convertion";
 
         Label mainLabel = new Label("Overlaping time gaps in timezone " + timezone);
         mainLabel.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.REGULAR, 28));
@@ -110,7 +117,7 @@ public class ResultsWin {
                     //IST = UTC+5:30
                     //GMT = UTC
                     //WAT = UTC + 1
-                    String[] range = convTimeGap.split(" - ");
+                    String[] range = timeGap.split(" - ");
                    
                     String[] times1 = range[0].split(":");
                     String[] times2 = range[1].split(":");
@@ -121,18 +128,27 @@ public class ResultsWin {
                     System.arraycopy(times2, 0, times, 2, 2);
 
                     for(int j=0; j<times.length; j++){
-                        if(!times[j].equals("00")){
+                        if(j == 0 || j == 2){
                             int time = Integer.parseInt(times[j]);
                             if(timezoneCombo.getValue().equals("EEST")){
                                 time += 2;
+                                if(time >= 24){
+                                    time -= 24;
+                                }
                                 times[j] = String.valueOf(time);
                             }
                             else if(timezoneCombo.getValue().equals("IST")){
                                 time += 5;
+                                if(time >= 24){
+                                    time -= 24;
+                                }
                                 times[j] = String.valueOf(time);
                             }
                             else if(timezoneCombo.getValue().equals("WAT")) {
                                 time += 1;
+                                if(time >= 24){
+                                    time -= 24;
+                                }
                                 times[j] = String.valueOf(time);
                             }
                             else {
@@ -143,6 +159,9 @@ public class ResultsWin {
                             int time = Integer.parseInt(times[j]);
                             if(timezoneCombo.getValue().equals("IST")){
                                 time += 30;
+                                if(time >= 60){
+                                    time -= 60;
+                                }
                                 times[j] = String.valueOf(time);
                             }
                         }

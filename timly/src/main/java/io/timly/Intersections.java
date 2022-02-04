@@ -14,9 +14,6 @@ public class Intersections {
     private final List<Range> intervals;
 
     private Range intersection = null;
-    
-
-
 
     public Intersections(List<Time> intervals) throws Exception{
         if (intervals == null) throw new IllegalArgumentException("Argument can not be null");
