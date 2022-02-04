@@ -31,4 +31,15 @@ Install JAVA , maven , VScode
 -  Once you install Java in windows, click Close
 -  set environment variables for java
 
+### Installation for MAVEN
+-  Verify Java Installation in Your Machine java -version
+-  Set JAVA Environment
+-  Download Maven Archive https://maven.apache.org/download.cgi
+-  Extract the Maven Archive
+-  Set Maven Environment Variables
+       et the environment variables using system properties.
+        M2_HOME=C:\Program Files\Apache Software Foundation\apache-maven-3.8.4 M2=%M2_HOME%\bin MAVEN_OPTS=-Xms256m -Xmx512m
+-  Add Maven bin Directory Location to System Path
+-  Verify Maven Installation  mvn --version
+
 
