@@ -30,7 +30,6 @@ public class Intersections {
             if (this.intervals.get(
                     i).start > r ||
                     this.intervals.get(i).end < l) {
-                System.out.println(-1);
                 return false;
             }
 
