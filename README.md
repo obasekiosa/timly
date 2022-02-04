@@ -42,4 +42,11 @@ Install JAVA , maven , VScode
 -  Add Maven bin Directory Location to System Path
 -  Verify Maven Installation  mvn --version
 
+### Installation for VSCODE
+- Download the Setup File https://code.visualstudio.com/
+- Run the VS code Setup Wizard 
+- Accept the License Agreement
+-  Select the Installation Location
+-  Placing the Shortcuts
+- Selecting Additional Tasks -  Finish and Launch
 
