@@ -26,7 +26,7 @@ public class ResultsWin {
     public static String timeGap;
     public static String convTimeGap;
     
-    public static void resultsWin(Stage stage) {
+    public static void resultsWin(Stage stage, Intersections inter) {
         Stage resultsWin = new Stage();
         StackPane stackPane = new StackPane();
         Scene scene = new Scene(stackPane, 1080, 820);
