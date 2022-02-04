@@ -47,7 +47,7 @@ public class MainWin {
                             "22:00","23:00","0:00"
                         };
 
-        String timezones[] = { "IST", "GMT", "EST", "WAT", "UTC" };
+        String timezones[] = { "IST", "GMT", "EEST", "WAT", "UTC" };
 
         // Create a combo box
         ComboBox combo_box = new ComboBox(FXCollections.observableArrayList(from));

@@ -41,7 +41,7 @@ public class ResultsWin {
 
         timezone = "UTC";
         timeGap = "some TimeGap returned from a backend method";
-        convTimeGap = "select a timezone to make a convertion to";
+        convTimeGap = "10:00 - 12:00";
 
         Label mainLabel = new Label("Overlaping time gaps in timezone " + timezone);
         mainLabel.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.REGULAR, 28));
@@ -58,7 +58,7 @@ public class ResultsWin {
         toLabel.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 16));
 
         ComboBox<String> timezoneCombo = new ComboBox<String>();
-        timezoneCombo.getItems().addAll("IST", "GMT", "EST", "WAT", "UTC");
+        timezoneCombo.getItems().addAll("IST", "GMT", "EEST", "WAT", "UTC");
         timezoneCombo.getSelectionModel().select(4);
         timezoneCombo.setStyle("-fx-font-size: 16");
 
@@ -106,8 +106,63 @@ public class ResultsWin {
 	                alert.showAndWait();
                 }
                 else{
-                    convTimeGap = "some convTimeGap returned from a backend method";
-                    convertResLabel.setText(convTimeGap);
+                    //EEST = UTC+2
+                    //IST = UTC+5:30
+                    //GMT = UTC
+                    //WAT = UTC + 1
+                    String[] range = convTimeGap.split(" - ");
+                   
+                    String[] times1 = range[0].split(":");
+                    String[] times2 = range[1].split(":");
+
+                    String[] times = new String[4];
+
+                    System.arraycopy(times1, 0, times, 0, 2);
+                    System.arraycopy(times2, 0, times, 2, 2);
+
+                    for(int j=0; j<times.length; j++){
+                        if(!times[j].equals("00")){
+                            int time = Integer.parseInt(times[j]);
+                            if(timezoneCombo.getValue().equals("EEST")){
+                                time += 2;
+                                times[j] = String.valueOf(time);
+                            }
+                            else if(timezoneCombo.getValue().equals("IST")){
+                                time += 5;
+                                times[j] = String.valueOf(time);
+                            }
+                            else if(timezoneCombo.getValue().equals("WAT")) {
+                                time += 1;
+                                times[j] = String.valueOf(time);
+                            }
+                            else {
+                                times[j] = String.valueOf(time);
+                            }
+                        }
+                        else{
+                            int time = Integer.parseInt(times[j]);
+                            if(timezoneCombo.getValue().equals("IST")){
+                                time += 30;
+                                times[j] = String.valueOf(time);
+                            }
+                        }
+                    }
+
+                    String convRange = "";
+                    for(int i=0; i<times.length; i++){
+                        if(i%2 == 0){
+                            convRange += times[i] + ":";
+                        }
+                        else{
+                            convRange += times[i];
+                        }
+                        
+                        if(i == 1) {
+                            convRange += " - ";
+                        }
+                        
+                    }
+                    convertResLabel.setText(convRange);
                 }
             }    
         });
