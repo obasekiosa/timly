@@ -1,21 +1,44 @@
 package io.timly;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+
 public class Intersections {
+
+    private static final HashMap<String, Double> timezones = new HashMap<>();
 
     private final List<Range> intervals;
 
     private Range intersection = null;
     
 
+
+
     public Intersections(List<Time> intervals) throws Exception{
         if (intervals == null) throw new IllegalArgumentException("Argument can not be null");
+        
         this.intervals = convertToRange(intervals);
+        populateTimzeZones();
     }
 
     private List<Range> convertToRange(List<Time> list) {
-        throw new UnsupportedOperationException();
+        List<Range> rangeList = new ArrayList<>(list.size());
+        for(Time time : list) {
+            rangeList.add(new Range(time.getStartTime(), time.getEndTime(), time.getTimezone()));
+        }
+
+        return rangeList;
+    }
+
+    private void populateTimzeZones() {
+        timezones.put("EEST", 3.0);
+        timezones.put("IST", 5.5);
+        timezones.put("GMT", 0.0);
+        timezones.put("WAT", 1.0);
     }
 
     public boolean findIntersection() {
@@ -27,9 +50,7 @@ public class Intersections {
         for (int i = 1; i < this.intervals.size(); i++) {
 
             // no intersection exists
-            if (this.intervals.get(
-                    i).start > r ||
-                    this.intervals.get(i).end < l) {
+            if (this.intervals.get(i).start > r || this.intervals.get(i).end < l) {
                 return false;
             }
 
@@ -39,17 +60,32 @@ public class Intersections {
                 r = Math.min(r, this.intervals.get(i).end);
             }
         }
-        this.intersection =  new Range(toTime(l), toTime(r));
+        this.intersection =  new Range(toTime(l), toTime(r), "GMT");
 
         return true;
     }
 
     private String toTime(long time) {
-        throw new UnsupportedOperationException();
+        long hrs = time % 60;
+        long min = time / 60;
+
+        String hrStr = String.valueOf(hrs);
+        if (hrStr.length() < 2)
+            hrStr = "0" + hrStr;
+
+        String minStr = String.valueOf(min);
+        if (minStr.length() < 2) 
+            minStr = "0" + minStr;
+
+        return new StringBuilder().append(hrStr).append(":").append(minStr).toString();
     }
 
-    private long toLong(String time) {
-        throw new UnsupportedOperationException();
+    private long toLong(String time, String zone) {
+        String[] tokens = time.split(":");
+        String hrs = tokens[0].trim();
+        String mins = tokens[1].trim();
+
+        return Integer.valueOf(hrs) * 60 +  Integer.valueOf(mins) + (long)(timezones.getOrDefault(zone, 0.0) * 60); // returns zero as the timezone offset if it can not find it
     }
 
 
@@ -67,9 +103,9 @@ public class Intersections {
         private final long start;
         private final long end;
 
-        public Range(String start, String stop) {
-            this.start = toLong(start);
-            this.end = toLong(stop);
+        public Range(String start, String stop, String zone) {
+            this.start = toLong(start, zone);
+            this.end = toLong(stop, zone);
         }
         
 
