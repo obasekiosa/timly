@@ -10,6 +10,7 @@ import javafx.scene.text.FontWeight;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -77,19 +78,46 @@ public class MainWin {
         resultButton.setFont(Font.font("verdaba", FontWeight.NORMAL, FontPosture.REGULAR, 16));
                 
         VBox v1= new VBox();
+        HBox h0= new HBox();
         HBox h1= new HBox();
         HBox h2= new HBox();
         HBox h3= new HBox();
         HBox h4= new HBox();
         HBox h5= new HBox();
-        h1.getChildren().addAll(combo_box,combo_box2,combo_box3);
+        Label label0 = new Label("                                      ");
+        Label label00 = new Label("                                                                                               FROM         ");
+        Label label000 = new Label("                      TO   ");
+        Label label0000 = new Label("                  TIMEZONE        ");
+        Label label1 = new Label("Schezeen    ");
+        Label label2 = new Label("Dhanashree");
+        Label label3 = new Label("obaseki       ");
+        Label label4 = new Label("Christos      ");
+        h0.getChildren().addAll(label0,label00,label000,label0000);
+        h1.getChildren().addAll(label1,combo_box,combo_box2,combo_box3);
         h2.getChildren().addAll(resultButton);
-        h3.getChildren().addAll(combo_boxn,combo_box2n,combo_box3n);
-        h4.getChildren().addAll(combo_boxnn,combo_box2nn,combo_box3nn);
-        h5.getChildren().addAll(combo_boxnx,combo_box2nx,combo_box3nx);
-        v1.getChildren().addAll(h1,h3,h4,h5,h2);
+        h3.getChildren().addAll(label2,combo_boxn,combo_box2n,combo_box3n);
+        h4.getChildren().addAll(label3, combo_boxnn,combo_box2nn,combo_box3nn);
+        h5.getChildren().addAll(label4,combo_boxnx,combo_box2nx,combo_box3nx);
+        v1.getChildren().addAll(h0,h1,h3,h4,h5,h2);
         st.getChildren().addAll(v1);
         v1.setAlignment(Pos.CENTER);
+        h2.setAlignment(Pos.CENTER);
+        h1.setAlignment(Pos.CENTER);
+        h3.setAlignment(Pos.CENTER);
+        h4.setAlignment(Pos.CENTER);
+        h5.setAlignment(Pos.CENTER);
+        
+                
+               // Scene sc = new Scene(st, 200, 200);
+        
+                st.setPadding(new Insets(10, 10, 10, 10));
+        
+                v1.setSpacing(30);
+                h1.setSpacing(30);
+                h2.setSpacing(30);
+               h3.setSpacing(30);
+                h4.setSpacing(30);
+                h5.setSpacing(30);
                 
         mainWinStage.setScene(sc);
         mainWinStage.setTitle("Timly");
